@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Dilema</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="username">Username</string>
+
+
+    <string name="myDilemmas">MINE</string>
+    <string name="level">NIVEAU</string>
+    <string name="new_dilema">NYT</string>
+    <string name="current">AKTUELLE</string>
+
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="test">test</string>
+
+
+    <string name="createNewDilema">Her er det muligt at oprette dit eget dilemma</string>
+    <string name="newDilemmaBody">Beskriv dit dilemma her</string>
+    <string name="newDilemmaTitel">Giv dit dilemma en titel</string>
+</resources>

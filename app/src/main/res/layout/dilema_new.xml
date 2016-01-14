@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="right"
+        android:background="#0000ff"
+        android:layout_weight="0.06">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="NYT DILEMMA"
+            android:id="@+id/createNewDilemma"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newDilemmaTitel"
+        android:hint="@string/newDilemmaTitel"
+        android:maxLength="30"/>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="@string/newDilemmaBody"
+        android:id="@+id/newDilemmaBody"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.93" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vælg billed"
+            android:id="@+id/button4"
+            android:layout_weight="0.06" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:id="@+id/button5"
+            android:layout_weight="0.06" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_margin="5dp"
+        android:text="http:/" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newDilemmaDegree"
+        android:spinnerMode="dropdown"
+        android:entries="@array/levelSpinner"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Opret Dilemma"
+        android:id="@+id/newDilemmaSubmit"
+        android:layout_gravity="right" />
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="right"
+        android:background="#0000ff"
+        android:layout_weight="0.06">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Dilemma titel"
+            android:id="@+id/dilemmatitle"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Dilemma Body Text"
+            android:id="@+id/dilemmaTextBody"
+            android:layout_weight="0.72"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dilemmaAnswerText"
+            android:layout_weight="0.21"
+            android:hint="Skriv svar her"
+            android:background="#E6E6E6"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="levelSpinner">
+            <item>Let</item>
+            <item>Middel</item>
+            <item>Tung</item>
+        </string-array>
+
+    <string-array name="Dilemmas">
+        <item>"Hvorfor en kjole skal jeg have på?"</item>
+        <item>"Hvad skal vi kalde vores hund?"</item>
+        <item>"Slap af, eller fest i aften?"</item>
+        <item>"Summerhustur eller ej?"</item>
+        <item>"Apple eller Windows"</item>
+    </string-array>
+
+
+    <string-array name="DilemmasBody">
+        <item>"Test af kjole"</item>
+        <item>"Ny hund test"</item>
+        <item>"Fest eller slap af test?"</item>
+        <item>"Skal vi i summerhus? Test!"</item>
+        <item>"Apple eller Windows test?"</item>
+    </string-array>
+
+    <string-array name="DilemmasLevel">
+        <item>"Let"</item>
+        <item>"Middel"</item>
+        <item>"Let"</item>
+        <item>"Tung"</item>
+        <item>"Middel"</item>
+    </string-array>
+</resources>
