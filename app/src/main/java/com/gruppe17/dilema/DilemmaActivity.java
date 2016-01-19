@@ -6,14 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * Created by Søren on 09-12-2015.
- */
 public class DilemmaActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dilemma);
-
+        Bundle b = getIntent().getExtras();
+        String value = b.getString("dilemmaTitel");
+        System.out.println(value);
 
 
     }
