@@ -1,49 +1,35 @@
 package com.gruppe17.dilema;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+//MyActivity er vores hovedklasse hvor vi starter fra.
 public class MyActivity extends Activity {
-
+   //Button listeners.
     private View.OnClickListener newDilemmaButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
           Intent newIntent = new Intent(MyActivity.this, newDilemaActivity.class);
-
+            //Sender os til newDilemaActivity.class
             startActivity(newIntent);
-
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     };
 
@@ -51,9 +37,9 @@ public class MyActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent newIntent = new Intent(MyActivity.this, Login.class);
-
+            //Sender os til Login.class
             startActivity(newIntent);
-
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     };
 
@@ -61,54 +47,58 @@ public class MyActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent newIntent = new Intent(MyActivity.this, DilemmaActivity.class);
+            //Sender os til DilemmaActivity.class
             startActivity(newIntent);
-
-
         }
     };
-    LinearLayout ll;
-    TextView dilemaTextView;
-    TextView dilemaBodyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Shared preferences allow local save of information
+        //Shared prefference bruges til små mængder information som bruges i hele appen.
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //Assign DB connection to string api, if not accessible print "DB connection not accessible";
+        //shared preference firebaseApi assignes til api.
         String api = preferences.getString("firebaseApi", "DB connection not accessible");
 
-        //Setup android to use Firebase;
+        //Sætter firbase op.
         Firebase.setAndroidContext(this);
-        //Assign DB connection to root
+        //Assign DB connection til root
         Firebase root = new Firebase(api+"Dilemma");
-
-        Log.d("Firebase connection", root.toString());
-        final ArrayList<String> dilemmaTitels = new ArrayList<>();
+        //Laver en Arraylist og gøre den final så den kan bruges fra hele klassen.
+        final ArrayList<Dilemma> dilemmas = new ArrayList<Dilemma>();
+        final ArrayList<String> dilemmasView = new ArrayList<String>();
+        //Laver en eventlistener fra firebase
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child: snapshot.getChildren()){
-
-                    String dilemmaTitel = child.child("DilemmaTitel").getValue() + " Rateing: " + child.child("DilemmaRating").getValue();
-                    dilemmaTitels.add(dilemmaTitel);
+                    long dilemmaId = (long) child.child("DilemmaId").getValue();
+                    String dilemmaTitel = (String) child.child("DilemmaTitel").getValue();
+                    String dilemmaBody = (String) child.child("DilemmaBody").getValue();
+                    String dilemmaRating = (String) child.child("DilemmaRating").getValue();
+                    dilemmas.add(new Dilemma(dilemmaId, dilemmaTitel, dilemmaBody, dilemmaRating));
+                    dilemmasView.add(dilemmaTitel + " Vægt: " +  dilemmaRating);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                        MyActivity.this, android.R.layout.simple_list_item_1, dilemmaTitels);
+
+                ArrayAdapter<Dilemma> adapter = new ArrayAdapter<>(
+                        MyActivity.this, android.R.layout.simple_list_item_1, dilemmas);
                 final ListView dilemmaList = (ListView) findViewById(R.id.listView);
+
                 dilemmaList.setAdapter(adapter);
                 dilemmaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         int itemPosition = position;
 
-                        String value = (String) dilemmaList.getItemAtPosition(position);
+                        String value = (String) dilemmaList.getItemAtPosition(position).toString();
+                        String dilemmaId = value.substring(0, 7);
                         Intent intent = new Intent(MyActivity.this, DilemmaActivity.class);
                         Bundle b = new Bundle();
-                        b.putString("dilemmaTitel", value);
+                        b.putString("dilemmaTitel", dilemmaId);
                         intent.putExtras(b);
                         startActivity(intent);
-                        finish();
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
                     }
                 });
             }
@@ -121,43 +111,6 @@ public class MyActivity extends Activity {
 
 
         setContentView(R.layout.activity_my);
-
-
-
-        int n=10;
-
-        Query queryRef = root.orderByKey().limitToFirst(n);
-        queryRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                Map<String, String> value = (Map<String, String>) snapshot.getValue();
-                List<String> list = new ArrayList<String>(value.values());
-                System.out.println(list);
-
-            }
-
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-            // ....
-        });
 
 
 

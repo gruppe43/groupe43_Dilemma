@@ -44,6 +44,17 @@ public class Register extends Activity implements View.OnClickListener{
         //Setup android to use Firebase;
         Firebase.setAndroidContext(this);
 
+        Button backButton = (Button)findViewById(R.id.backButtonRegister);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(Register.this, MyActivity.class);
+                //Sender os til DilemmaActivity.class
+                startActivity(newIntent);
+                overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+            }
+        });
 
     }
 

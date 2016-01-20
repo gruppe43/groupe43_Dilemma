@@ -1,7 +1,7 @@
 package com.gruppe17.dilema;
-
+//Her laves en class og constructor til at håndtere Dilemmaer
 public class Dilemma {
-    private int id;
+    private long id;
     private String dilemmaTitel;
     private String dilemmaBody;
     private String dilemmaRating;
@@ -10,7 +10,7 @@ public class Dilemma {
         super();
     }
 
-    public Dilemma(int id, String dilemmaTitel, String dilemmaBody, String dilemmaRating) {
+    public Dilemma(long id, String dilemmaTitel, String dilemmaBody, String dilemmaRating) {
         super();
         this.id = id;
         this.dilemmaTitel = dilemmaTitel;
