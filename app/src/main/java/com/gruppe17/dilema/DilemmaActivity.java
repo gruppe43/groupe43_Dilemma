@@ -13,10 +13,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.gruppe17.dilema.Service.NotificationEventReceiver;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,7 +63,7 @@ public class DilemmaActivity extends Activity{
                 String dilemmaTitel = (String) snapshot.child("DilemmaTitel").getValue();
                 String dilemmaBody = (String) snapshot.child("DilemmaBody").getValue();
                 String dilemmaRating = (String) snapshot.child("DilemmaRating").getValue();
-
+                root.child("/ChangeMade").setValue(false);
                 TextView Titel = (TextView) findViewById(R.id.dilemmatitle);
                 TextView Body = (TextView) findViewById(R.id.dilemmaTextBody);
                 //Opdatere textviews til at vise de informationer vi har fået.
@@ -90,15 +92,44 @@ public class DilemmaActivity extends Activity{
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+        root.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                String dilemma = snapshot.toString();
+                NotificationEventReceiver.setupAlarm(getApplicationContext());
+                Log.d("ChildAdded: ", snapshot.toString());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                NotificationEventReceiver.setupAlarm(getApplicationContext());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
         Button submitButton = (Button)findViewById(R.id.commentButton);
         final TextView commentBody = (TextView)findViewById(R.id.dilemmaAnswerText);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Random r = new Random();
-                int commentId = r.nextInt(9999999)+1000000;
+                int commentId = r.nextInt(9999999) + 1000000;
                 String Body = commentBody.getText().toString();
-
+                root.child("/ChangeMade").setValue(true);
                 root.child("/Comments/" + commentId + "/Commentbody").setValue(Body);
 
             }

@@ -10,14 +10,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.gruppe17.dilema.Service.NotificationEventReceiver;
 
 import java.util.ArrayList;
 //MyActivity er vores hovedklasse hvor vi starter fra.
@@ -71,13 +72,13 @@ public class MyActivity extends Activity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot child: snapshot.getChildren()){
+                for (DataSnapshot child : snapshot.getChildren()) {
                     long dilemmaId = (long) child.child("DilemmaId").getValue();
                     String dilemmaTitel = (String) child.child("DilemmaTitel").getValue();
                     String dilemmaBody = (String) child.child("DilemmaBody").getValue();
                     String dilemmaRating = (String) child.child("DilemmaRating").getValue();
                     dilemmas.add(new Dilemma(dilemmaId, dilemmaTitel, dilemmaBody, dilemmaRating));
-                    dilemmasView.add(dilemmaTitel + " Vægt: " +  dilemmaRating);
+                    dilemmasView.add(dilemmaTitel + " Vægt: " + dilemmaRating);
                 }
 
                 ArrayAdapter<Dilemma> adapter = new ArrayAdapter<>(
