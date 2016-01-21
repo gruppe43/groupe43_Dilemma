@@ -44,6 +44,17 @@ public class MyActivity extends Activity {
         }
     };
 
+    private View.OnClickListener myDilemmasListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent newIntent = new Intent(MyActivity.this, myDilemmasActivity.class);
+            //Sender os til Login.class
+            startActivity(newIntent);
+            overridePendingTransition(0,0);
+             }
+    };
+
+
     private View.OnClickListener dilemaBodyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -118,6 +129,9 @@ public class MyActivity extends Activity {
         TextView login = (TextView) findViewById(R.id.menu_login);
         login.setOnClickListener(newLoginListener);
 
+        Button myDilemmas = (Button) findViewById(R.id.myDilemmas);
+
+        myDilemmas.setOnClickListener(myDilemmasListener);
 
         //Definere newButton
         Button newButton = (Button) findViewById(R.id.newButton);

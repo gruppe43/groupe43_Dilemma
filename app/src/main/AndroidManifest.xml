@@ -30,6 +30,9 @@
         <activity
             android:name=".Register">
         </activity>
+        <activity
+            android:name=".myDilemmasActivity">
+        </activity>
 
         <service
             android:name=".Service.NotificationIntentService"

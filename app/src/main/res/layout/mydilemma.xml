@@ -10,33 +10,6 @@
         android:weightSum="1"
         android:id="@+id/linearLayout">
 
-        <FrameLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                android:layout_alignTop="@+id/arrayLayout"
-                android:layout_alignLeft="@+id/commentButton"
-                android:layout_alignStart="@+id/commentButton"
-                android:layout_gravity="right" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Login/Opret"
-                android:id="@+id/menu_login"
-                android:layout_gravity="left|center_vertical" />
-
-
-        </FrameLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -47,13 +20,13 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:weightSum="1">
 
                 <FrameLayout
 
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
                     android:background="#0000ff"
                     >
@@ -62,7 +35,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="AKTUELLE DILEMMAER"
+                        android:text="MINE DILEMMAER"
                         android:id="@+id/textView"
                         android:layout_gravity="center"
                         android:textStyle="bold"
@@ -70,14 +43,6 @@
                         android:gravity="center_vertical"/>
 
                 </FrameLayout>
-
-                <Spinner
-                    android:layout_width="111dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/niveauDropdown"
-                    android:spinnerMode="dropdown"
-                    android:entries="@array/levelSpinner"
-                    android:background="#0000ff"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -119,16 +84,16 @@
             android:layout_toStartOf="@+id/button3"
             android:id="@+id/myDilemmas"
             android:layout_weight="0.33"
-            android:background="@drawable/minehvid"/>
+            android:background="@drawable/mine"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/aktuelle"
-            android:id="@+id/button3"
+            android:layout_toLeftOf="@+id/newButton"
+            android:id="@+id/myAktuelle"
             android:layout_weight="0.33"
-            android:background="@drawable/aktuelle"/>
+            android:background="@drawable/aktuellehvid"/>
 
         <Button
             android:layout_width="0dp"
